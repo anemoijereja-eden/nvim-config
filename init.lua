@@ -1,7 +1,15 @@
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 vim.cmd.colorscheme 'elflord_tweaked'
+
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'LSP Code Action' })
+vim.keymap.set('n', '<leader>fml', '<cmd>CellularAutomaton make_it_rain<CR>')
+
+-- quick ai binds
+vim.keymap.set('n', '<leader>ar', '<cmd>PrtReview<CR>', { desc = 'AI code Review' })
+vim.keymap.set('n', '<leader>acf', '<cmd>PrtChatFinder<CR>', { desc = 'AI [C]hat [F]ind' })
+vim.keymap.set('n', '<leader>acr', '<cmd>PrtChatResponde<CR>', { desc = 'AI [C]hat [R]espond' })
+vim.keymap.set('n', '<leader>acp', '<cmd>PrtChatPaste<CR>', { desc = 'AI [C]hat [P]aste' })
 
 vim.cmd [[autocmd VimEnter * NvimTreeOpen]]
 vim.cmd [[autocmd VimEnter * Neogit kind=split]]
@@ -182,6 +190,9 @@ require('lazy').setup({
     },
   },
 
+  -- Funky cellular automata plugin
+  'eandrju/cellular-automaton.nvim',
+
   -- git tui interface
   {
     'NeogitOrg/neogit',
@@ -240,10 +251,13 @@ require('lazy').setup({
       require('parrot').setup {
         providers = {
           openai = {
+            name = 'openai',
+            endpoint = 'https://api.openai.com/v1/chat/completions',
             api_key = os.getenv 'OPENAI_KEY',
             models = {
               'gpt-4.1-mini',
               'gpt-4o',
+              'gpt-o4-mini',
             },
             topic = {
               model = 'gpt-4.1-nano',
