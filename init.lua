@@ -11,6 +11,9 @@ vim.keymap.set('n', '<leader>acf', '<cmd>PrtChatFinder<CR>', { desc = 'AI [C]hat
 vim.keymap.set('n', '<leader>acr', '<cmd>PrtChatResponde<CR>', { desc = 'AI [C]hat [R]espond' })
 vim.keymap.set('n', '<leader>acp', '<cmd>PrtChatPaste<CR>', { desc = 'AI [C]hat [P]aste' })
 
+-- Hex Editing
+vim.keymap.set('n', '<leader>ht', '<cmd>HexToggle<CR>', { desc = '[H]ex  editor [T]oggle' })
+
 vim.cmd [[autocmd VimEnter * NvimTreeOpen]]
 vim.cmd [[autocmd VimEnter * Neogit kind=split]]
 vim.cmd [[autocmd VimEnter * wincmd l]]
@@ -188,6 +191,14 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
     },
+  },
+
+  -- Hex Editor
+  {
+    'RaafatTurki/hex.nvim',
+    config = function()
+      require('hex').setup()
+    end,
   },
 
   -- Funky cellular automata plugin
